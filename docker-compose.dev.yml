@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  chatserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: chatserver-dev
+    ports:
+      - "5000:8080"  # HTTP
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - Logging__LogLevel__Default=Debug
+      - Logging__LogLevel__Microsoft.AspNetCore=Information
+    volumes:
+      # Mount source code for hot reload (if using dotnet watch)
+      - ./src:/src:ro
+    restart: "no"  # Don't restart automatically in dev
+    networks:
+      - chatnetwork-dev
+
+networks:
+  chatnetwork-dev:
+    driver: bridge
