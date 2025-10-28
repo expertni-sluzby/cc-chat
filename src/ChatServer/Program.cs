@@ -65,8 +65,11 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = "swagger";
     });
 }
-
-app.UseHttpsRedirection();
+else
+{
+    // HTTPS redirection only in production (handled by reverse proxy in dev)
+    app.UseHttpsRedirection();
+}
 
 app.UseCors();
 
