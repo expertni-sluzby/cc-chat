@@ -8,9 +8,8 @@ services:
     container_name: chatserver
     ports:
       - "5000:8080"  # HTTP
-      - "5001:8081"  # HTTPS (if configured)
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_HTTP_PORTS=8080
     restart: unless-stopped
